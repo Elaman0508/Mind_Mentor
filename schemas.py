@@ -20,3 +20,10 @@ class UserResponse(UserBase):
 
     class Config:
         orm_mode = True
+
+class UserCreate(UserBase):
+    password: str
+    confirm_password: str
+    terms_agreed: bool
+    confirm_password: str
+    terms_agreed: bool
