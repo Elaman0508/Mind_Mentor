@@ -1,29 +1,26 @@
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, EmailStr
 
-class UserBase(BaseModel):
+# Schemas for user creation, login, update, and response
+
+class UserCreate(BaseModel):
     name: str
-    email: str
-
-class UserCreate(UserBase):
+    email: EmailStr
     password: str
+    confirm_password: str
+    terms_agreed: bool
 
 class UserLogin(BaseModel):
-    email: str
+    email: EmailStr
     password: str
 
-class UserUpdate(UserBase):
-    password: Optional[str] = None
+class UserUpdate(BaseModel):
+    name: str
+    password: str = None
 
-class UserResponse(UserBase):
+class UserResponse(BaseModel):
     id: int
+    name: str
+    email: EmailStr
 
     class Config:
         orm_mode = True
-
-class UserCreate(UserBase):
-    password: str
-    confirm_password: str
-    terms_agreed: bool
-    confirm_password: str
-    terms_agreed: bool
